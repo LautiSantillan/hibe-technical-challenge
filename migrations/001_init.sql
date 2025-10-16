@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS payments (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS idempotency_keys (
   key TEXT PRIMARY KEY,
   request_hash TEXT NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS idempotency_keys (
   response_body TEXT,
   created_at TEXT NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS payment_history (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   payment_id TEXT NOT NULL,

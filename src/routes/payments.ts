@@ -25,14 +25,14 @@ router.post('/', async (req, res) => {
   const id = uuidv4();
   const now = new Date().toISOString();
   const checkout_url = `https://sandbox.hibe.local/checkout/${id}`;
-  await db.insert(payments).values({
+  db.insert(payments).values({
     id, description: data.description, due_date: data.due_date,
     amount_cents: data.amount_cents, currency: data.currency,
     payer_name: data.payer.name, payer_email: data.payer.email,
     status: 'pending', checkout_url, created_at: now, updated_at: now
   }).run();
   const response = { payment_id: id, status: 'pending', checkout_url };
-  await storeIdempotency(key, hash, id, response);
+  storeIdempotency(key, hash, id, response);
   res.status(201).json(response);
 });
 
@@ -74,7 +74,7 @@ router.post('/batch', async (req, res) => {
     });
   }
   const response = { results };
-  await storeIdempotency(key, hash, null, response);
+  storeIdempotency(key, hash, null, response);
   res.json(response);
 });
 

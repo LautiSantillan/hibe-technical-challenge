@@ -8,7 +8,7 @@ Idempotency-Key: key-1
   "due_date": "2025-10-20",
   "amount_cents": 1500,
   "currency": "USD",
-  "payer": { "name": "Lautaro", "email": "lauta@example.com" }
+  "payer": { "name": "Juan", "email": "lauta@example.com" }
 }
 
 ### Listar pagos
@@ -31,6 +31,6 @@ X-Webhook-Token: change_me_secret_token
 
 {
   "payment_id": "6cff401b-13fd-41e1-be6b-0ccea6ca5ed0",
-  "new_status": "paid",
+  "new_status": "reversed",
   "reason": "Pago aprobado manualmente"
 }
