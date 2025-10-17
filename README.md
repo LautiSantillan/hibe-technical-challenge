@@ -31,4 +31,4 @@ Server available at: http://localhost:3000
 All example requests to test the API are documented in this file:
 ➡️ [curl-commands.md](./curl-commands.md)
 
-You can also test the endpoints with the `tests/requests.http` file.
+You can also test the endpoints with the `tests/requests.http` file by installing the REST Client extension.
