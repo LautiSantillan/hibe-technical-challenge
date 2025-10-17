@@ -1,36 +1,71 @@
-### Crear un pago
+### Create a payment
 POST http://localhost:3000/api/v1/payments
 Content-Type: application/json
 Idempotency-Key: key-1
 
 {
-  "description": "Servicio de prueba",
+  "description": "First payment",
   "due_date": "2025-10-20",
   "amount_cents": 1500,
   "currency": "USD",
-  "payer": { "name": "Juan", "email": "lauta@example.com" }
+  "payer": { "name": "Lautaro", "email": "lauta@example.com" }
 }
 
-### Listar pagos
+
+### List payments
 GET http://localhost:3000/api/v1/payments
 
-### Crear batch
+
+### Create batch
 POST http://localhost:3000/api/v1/payments/batch
 Content-Type: application/json
 Idempotency-Key: batch-1
 
 [
-  { "description": "Pago 1", "due_date": "2025-10-25", "amount_cents": 1000, "currency": "USD", "payer": { "name": "Juan", "email": "juan@test.com" } },
-  { "description": "Pago 2", "due_date": "2025-10-26", "amount_cents": 2000, "currency": "USD", "payer": { "name": "Ana", "email": "ana@test.com" } }
+  { "description": "Payment 1", 
+    "due_date": "2025-10-25", 
+    "amount_cents": 1000, 
+    "currency": "USD", 
+    "payer": { "name": "Juan", "email": "juan@test.com" } 
+    },
+    
+  { "description": "Payment 2", 
+    "due_date": "2025-10-26", 
+    "amount_cents": 2000, 
+    "currency": "USD", 
+    "payer": { "name": "Ana", "email": "ana@test.com" } 
+    }
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Simular webhook
 POST http://localhost:3000/api/v1/webhooks/simulate
 Content-Type: application/json
-X-Webhook-Token: change_me_secret_token
+X-Webhook-Token: secret_token
 
 {
-  "payment_id": "6cff401b-13fd-41e1-be6b-0ccea6ca5ed0",
+  "payment_id": "1145ca12-e287-4928-9de2-9a890ab56497",
   "new_status": "reversed",
-  "reason": "Pago aprobado manualmente"
+  "reason": "Payment reversed"
 }

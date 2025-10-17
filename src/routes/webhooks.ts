@@ -16,8 +16,8 @@ router.post('/simulate', async (req, res) => {
   if (!payment) return res.status(404).json({ error: 'payment_not_found' });
   const allowed = (payment.status === 'pending' && new_status === 'paid') || (payment.status === 'paid' && new_status === 'reversed');
   if (!allowed) return res.status(422).json({ error: 'invalid_transition' });
-  await db.update(payments).set({ status: new_status, updated_at: new Date().toISOString() }).where(eq(payments.id, payment_id)).run();
-  await db.insert(payment_history).values({
+  db.update(payments).set({ status: new_status, updated_at: new Date().toISOString() }).where(eq(payments.id, payment_id)).run();
+  db.insert(payment_history).values({
     payment_id, previous_status: payment.status, new_status, reason, created_at: new Date().toISOString()
   }).run();
   res.json({ payment_id, status: new_status });
